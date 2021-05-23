@@ -8,43 +8,34 @@ def clear():
 
 def play_game():
     clear()
-    input("Welcome to binary4fun! Please press any key to start playing!")
-    input("Please think of a number between 1 and 100. Press any key if you have one.")
+    input("Welcome to binary4fun! Please press Enter to start playing!")
+    input("Please think of a number between 1 and 100. Press Enter if you have one.")
     clear()
     print("I will now try to guess the number. I bet I can do it in within 7 guesses!")
 
-    current_guess, current_ul, current_ll, number_o_guesses = 50, 100, 0, 0
+    current_ll, current_ul, current_guess, number_o_guesses = 1, 100, (1 + 100) // 2, 1
 
     while (
-        answer := input(
-            f"Is your number {current_guess}? Please answer 'yes' or 'no':\n"
-        )
-    ) != "yes":
+        input(f"Is your number {current_guess}? Please answer 'y' or 'n':\n")
+    ) != "y":
         number_o_guesses += 1
         clear()
         direction = input(
             "Is the number higher or lower? Type 'h' for higher or 'l' for lower:\n"
         )
-        if direction == "h":
-            current_ll, current_guess = (
-                current_guess,
-                (current_guess + current_ul) // 2,
-            )
-            clear()
+        clear()
         if direction == "l":
-            current_ul, current_guess = (
-                current_guess,
-                (current_guess + current_ll) // 2,
-            )
-            clear()
-        else:
-            direction = input(
-                "Is the number higher or lower? Type 'h' for higher or 'l' for lower\n"
-            )
-
-    clear()
+            current_ul = current_guess - 1
+        elif direction == "h":
+            current_ll = current_guess + 1
+        if current_ll == current_ul:
+            print(f"Okay, I must be {current_ll} then!\n")
+            break
+        current_guess = (current_ll + current_ul) // 2
+    else:
+        clear()
     print(
-        f"Cool! :) That took only {number_o_guesses + 1} guess{'es' if number_o_guesses > 0 else ''}. That's within 7 guesses! \n"
+        f"Cool! :) That took only {number_o_guesses} guess{'es' if number_o_guesses > 1 else ''} – which is within 7 guesses!"
     )
     if (
         input(
