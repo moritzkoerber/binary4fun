@@ -1,41 +1,47 @@
-import time
-from src.utils import halver
+from src.utils.clear_screen import clear_screen
 
 
-print("Welcome to binary4fun. Please press Enter to start a game!")
+def play_game():
+    clear_screen()
+    input("Welcome to binary4fun! Please press Enter to start playing!")
+    input("Please think of a number between 1 and 100. Press Enter if you have one.")
+    clear_screen()
+    print("I will now try to guess the number. I bet I can do it in within 7 guesses!")
 
-print("Let's go! Please think of a number between 1 and 100.")
+    current_ll, current_ul, current_guess, number_o_guesses = 1, 100, (1 + 100) // 2, 1
 
-time.sleep(2)
-print("To play the game, please tell me the number.")
+    while (
+        input(f"Is your number {current_guess}? Please answer 'y' or 'n':\n")
+    ) != "y":
+        number_o_guesses += 1
+        clear_screen()
+        direction = input(
+            "Is the number higher or lower? Type 'h' for higher or 'l' for lower:\n"
+        )
+        clear_screen()
+        if direction == "l":
+            current_ul = current_guess - 1
+        elif direction == "h":
+            current_ll = current_guess + 1
+        if current_ll == current_ul:
+            print(f"Okay, I must be {current_ll} then!\n")
+            break
+        current_guess = (current_ll + current_ul) // 2
+    else:
+        clear_screen()
+    print(
+        f"Cool! :) That took only {number_o_guesses} guess{'es' if number_o_guesses > 1 else ''} – which is within 7 guesses!"
+    )
+    if (
+        input(
+            "Thank you for playing! Do you want to play again? Please type 'yes or 'no'.\n"
+        )
+        == "yes"
+    ):
+        play_game()
+    clear_screen()
+    print("Okay, goodbye!")
 
-num = input()
 
-print(
-    "Thank you! I will now try to guess your number. I bet I need fewer than 7 guesses. Don't you think?"
-)
-time.sleep(0.5)
-
-guess = 50
-
-while (answer := ans) != "yes":
-
-    print(f'Please tell me, is your number {guess}? Type "yes" or "no".')
-
-    ans = input().lower()
-
-    if answer not in ("yes", "no"):
-        print("Please answer with 'yes' or 'no'.")
-        continue
-
-    print(f'Is your number smaller or larger than {guess}? Type "smaller" or "larger"')
-
-    direction = input().lower()
-
-    if answer not in ("smaller", "larger"):
-        print("Please answer with 'smaller' or 'larger'.")
-        continue
-
-    guess = guess / 2 if direction == "smaller" else guess * 2
-
-print("Great! Thank you for playing!")
+if __name__ == "__main__":
+    play_game()
