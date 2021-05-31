@@ -1,4 +1,4 @@
-from src.utils.clear_screen import clear_screen
+from utils.clear_screen import clear_screen
 
 
 def play_game():
