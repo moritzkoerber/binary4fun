@@ -2,5 +2,7 @@ import os
 
 
 def clear_screen():
-    os.system("cls")
-    os.system("clear")
+    """
+    Clears the output on Windows and Unix systems.
+    """
+    os.system("cls||clear")

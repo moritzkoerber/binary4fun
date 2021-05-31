@@ -1,7 +1,11 @@
-from utils.clear_screen import clear_screen
+from .utils.clear_screen import clear_screen
 
 
-def play_game():
+def main():
+    """
+    Runs the game.
+    """
+
     clear_screen()
     input("Welcome to binary4fun! Please press Enter to start playing!")
     input("Please think of a number between 1 and 100. Press Enter if you have one.")
@@ -38,10 +42,10 @@ def play_game():
         )
         == "yes"
     ):
-        play_game()
+        main()
     clear_screen()
     print("Okay, goodbye!")
 
 
 if __name__ == "__main__":
-    play_game()
+    main()
