@@ -15,7 +15,7 @@ def get_version(rel_path: str):
 
 setup(
     name="binary4fun",
-    version=get_version("binary4fun/__init__.py"),
+    version=get_version("src/binary4fun/__init__.py"),
     url="github...",
     author="Moritz Körber",
     author_email="moritz.koerber@gmail.com",
