@@ -22,11 +22,9 @@ setup(
     description="A little game to guess numbers by means of binary search.",
     long_description=README,
     long_description_content_type="text/markdown",
-    license="MIT",
     packages=["binary4fun"],
     classifiers=[
         "License :: OSI Approved :: MIT License",
-        "Programming Language :: Python",
         "Programming Language :: Python :: 3",
     ],
 )
