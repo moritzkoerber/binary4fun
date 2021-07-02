@@ -5,14 +5,17 @@ binary4fun is a small game written in Python that can be played in the cli. The 
 ## Installation
 ### pip
 
+To install with pip, run:
 ```
 pip install binary4fun
 ```
 
 ## Usage example
 
-A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
-
+To start the game, run:
+```
+$binary4fun
+```
 
 ## Release History
 
@@ -21,6 +24,7 @@ A few motivating and useful examples of how your product can be used. Spice this
 
 ## Meta
 Link to pypi page
+
 Moritz Körber – [@moritzkoerber](https://twitter.com/moritzkoerber)
 
 Distributed under the MIT license. See ``LICENSE`` for more information.
