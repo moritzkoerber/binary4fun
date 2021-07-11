@@ -24,4 +24,9 @@ setup(
     extras_require={
         "tests": ["pytest", "sh"],
     },
+    entry_points={
+        "console_scripts": [
+            "binary4fun=binary4fun.__main__:main",
+        ],
+    },
 )
