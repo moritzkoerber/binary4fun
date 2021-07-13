@@ -12,9 +12,9 @@ pip install binary4fun
 
 ## Usage
 
-To start the game, run the following in the command line:
+To start the game, just run `binary4fun` in the command line:
 ```
-python3 -m binary4fun
+$ binary4fun
 ```
 
 ## Release History
