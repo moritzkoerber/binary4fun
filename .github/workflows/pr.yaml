@@ -31,3 +31,26 @@ jobs:
       - name: Run pre-commit
         run: |
          pipenv run pre-commit run --all-files
+
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    needs: linting
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install environment
+        run: |
+          pip install pipenv
+          pipenv install --dev --deploy
+
+      - name: Run pytest
+        run: |
+         pipenv run pytest
