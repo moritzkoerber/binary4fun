@@ -1,0 +1,45 @@
+name: Manual PyPi Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      package_repository:
+        description: '"testpypi" or "pypi"'
+        required: true
+
+env:
+  PYTHON_VERSION: '3.8.2'
+
+jobs:
+  build_and_release:
+    name: Build and release package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install pypa/build
+        run: |
+          pip install build
+
+      - name: Build package
+        run: |
+          python -m build
+
+      - name: "Publish a Python distribution to TestPyPi"
+        if: ${{ github.event.inputs.package_repository == 'testpypi' }}
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+          repository_url: https://test.pypi.org/legacy/
+
+      - name: "Publish a Python distribution to PyPi"
+        if: ${{ github.event.inputs.package_repository == 'pypi' }}
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
