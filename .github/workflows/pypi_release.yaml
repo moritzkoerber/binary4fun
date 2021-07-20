@@ -23,6 +23,27 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
+      - name: Setup caches
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.local/share/virtualenvs
+            ~/.cache/pre-commit
+            ~/.cache/pip
+          key: ${{ runner.os }}-${{ env.PYTHON_VERSION }}-venv-${{ hashFiles('**/Pipfile*') }}-${{ hashFiles('**/.pre-commit-config.yaml*') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.PYTHON_VERSION }}-venv
+
+      - name: Install environment
+        run: |
+          pip install pipenv
+          pipenv install --dev --deploy
+
+      - name: Test installed package
+        run: |
+          pip install .
+          pytest
+
       - name: Install pypa/build
         run: |
           pip install build
