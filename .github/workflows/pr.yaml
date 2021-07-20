@@ -23,6 +23,17 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
+      - name: Setup caches
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.local/share/virtualenvs
+            ~/.cache/pre-commit
+            ~/.cache/pip
+          key: ${{ runner.os }}-${{ env.PYTHON_VERSION }}-venv-${{ hashFiles('**/Pipfile*') }}-${{ hashFiles('**/.pre-commit-config.yaml*') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.PYTHON_VERSION }}-venv
+
       - name: Install environment
         run: |
           pip install pipenv
@@ -30,7 +41,7 @@ jobs:
 
       - name: Run pre-commit
         run: |
-         pipenv run pre-commit run --all-files
+          pipenv run pre-commit run --all-files
 
   tests:
     name: Tests
@@ -46,6 +57,17 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
+      - name: Setup caches
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.local/share/virtualenvs
+            ~/.cache/pre-commit
+            ~/.cache/pip
+          key: ${{ runner.os }}-${{ env.PYTHON_VERSION }}-venv-${{ hashFiles('**/Pipfile*') }}-${{ hashFiles('**/.pre-commit-config.yaml*') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.PYTHON_VERSION }}-venv
+
       - name: Install environment
         run: |
           pip install pipenv
@@ -53,4 +75,4 @@ jobs:
 
       - name: Run pytest
         run: |
-         pipenv run pytest
+          pipenv run pytest

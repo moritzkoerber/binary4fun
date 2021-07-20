@@ -7,9 +7,6 @@ name = "pypi"
 pre-commit="*"
 sh = "*"
 pytest = "*"
-build = "*"
-setuptools-scm = "*"
-twine = "*"
 
 [requires]
 python_version = "3.8"
