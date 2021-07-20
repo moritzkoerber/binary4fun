@@ -11,7 +11,7 @@ env:
   PYTHON_VERSION: '3.8.2'
 
 jobs:
-  build_and_release:
+  testing:
     name: Build and release package
     runs-on: ubuntu-latest
     steps:
@@ -44,12 +44,32 @@ jobs:
           pip install .
           pytest
 
+  build:
+    name: Build and release package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Setup caches
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.local/share/virtualenvs
+            ~/.cache/pre-commit
+            ~/.cache/pip
+          key: ${{ runner.os }}-${{ env.PYTHON_VERSION }}-venv-${{ hashFiles('**/Pipfile*') }}-${{ hashFiles('**/.pre-commit-config.yaml*') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.PYTHON_VERSION }}-venv
+
       - name: Install pypa/build
         run: |
           pip install build
-
-      - name: Build package
-        run: |
           python -m build
 
       - name: "Publish a Python distribution to TestPyPi"
