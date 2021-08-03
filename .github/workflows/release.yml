@@ -77,14 +77,14 @@ jobs:
           pip install build
           python -m build
 
-      - name: "Publish a Python distribution to TestPyPi"
+      - name: Publish on TestPyPi
         if: ${{ github.event.inputs.package_repository == 'testpypi' }}
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.TEST_PYPI_API_TOKEN }}
           repository_url: https://test.pypi.org/legacy/
 
-      - name: "Publish a Python distribution to PyPi"
+      - name: Publish on PyPi
         if: ${{ github.event.inputs.package_repository == 'pypi' }}
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
