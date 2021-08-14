@@ -5,7 +5,7 @@ name = "pypi"
 
 [dev-packages]
 pre-commit="*"
-setuptools_scm="*"
+build="*"
 sh = "*"
 pytest = "*"
 
