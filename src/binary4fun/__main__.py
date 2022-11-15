@@ -30,7 +30,7 @@ def main():
         elif direction == "h":
             current_ll = current_guess + 1
         if current_ll == current_ul:
-            print(f"Okay, I must be {current_ll} then!\n")
+            print(f"Okay, it must be {current_ll} then!\n")
             break
         current_guess = (current_ll + current_ul) // 2
     else:
